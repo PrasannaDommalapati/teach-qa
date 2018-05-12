@@ -31,7 +31,7 @@ public class BasePage {
 	WebDriver testQA;
 	public static XSSFWorkbook workBook;
 	public static XSSFSheet mySheet;
-	public static final String projStructure = System.getProperty("user.dir"+"\\src\\main\\java\\app.data\\InputDataVersionPositive1.0.xlsx");
+	public static final String projStructure = System.getProperty("user.dir")+"\\assets\\data\\InputDataVersionPositive1.0.xlsx";
 	
 	public BasePage(WebDriver driv)
 	{
@@ -42,12 +42,12 @@ public class BasePage {
 	public void readExcel()
 	{
 		try {
-			File ff = new File(System.getProperty("user.dir"+projStructure));
+			File ff = new File(projStructure);
 			FileInputStream fis = new FileInputStream(ff);
 			workBook = new XSSFWorkbook(fis);
 			 
 		} catch (Exception e) {
-			System.out.println(""+e);
+			System.out.println("Exception::"+e);
 		}
 	}
 	
@@ -67,6 +67,7 @@ public class BasePage {
 	}
 
 	public int cellLocation(String textSearch) {
+		
 		int k =0;
 		for (int i=0; i<rowCount(0); i++)
 		{
@@ -96,7 +97,6 @@ public class BasePage {
 				catch(Exception e)
 				{
 				//catching an exception if the cell is empty
-					System.out.println("exception"+ e);
 				}
 			}
 		}
@@ -126,7 +126,7 @@ public class BasePage {
 			System.out.println("Element is:::"+identifier);
 			System.out.println("Exception is:::"+e);		}
 	}
-	public void clickElement(By identifier)
+	public void clickOn(By identifier)
 	{
 		try
 		{
