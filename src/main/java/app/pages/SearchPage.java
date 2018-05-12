@@ -23,13 +23,9 @@ public class SearchPage extends BasePage{
 	
 	//=========================== End of locators list =================
 	
-	public void enterSearchText() {
+	public void searchFunctionality() {
 		
 		enterTextTo(search, getData(0, row, 1));
-	}
-	
-	public void clickSearchBtn() {
-		
 		clickOn(searchBtn);
 	}
 }

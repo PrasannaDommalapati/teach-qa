@@ -3,8 +3,11 @@ package app.tests;
 
 import org.openqa.selenium.WebDriver;
 
+import app.helper.BasePage;
 import app.pages.SearchPage;
 import app.utils.AutomationUtils;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.IOException;
 
@@ -17,6 +20,7 @@ public class TestCases {
 	public static WebDriver testQA;
 		
     SearchPage searchPage;
+    BasePage basePage;
  
 	@BeforeAll
 	public static void startApp() throws IOException
@@ -46,10 +50,11 @@ public class TestCases {
 	public void test01() 
 	{
 		searchPage = new SearchPage(testQA);
+		basePage = new BasePage(testQA);
 		
-		searchPage.enterSearchText();
-		searchPage.clickSearchBtn();
+		searchPage.searchFunctionality();
 		
-		Assert.assertTrue(testQA.getTitle().equals("Selenium - Google Search"));			
+		assertAll("title", 
+				() ->assertEquals("Google",testQA.getTitle()));			
 	}
 }
