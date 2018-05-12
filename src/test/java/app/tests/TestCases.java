@@ -8,7 +8,9 @@ import app.utils.AutomationUtils;
 
 import java.io.IOException;
 
-import org.junit.*;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 public class TestCases {
 	
@@ -16,7 +18,7 @@ public class TestCases {
 		
     SearchPage searchPage;
  
-	@BeforeClass
+	@BeforeAll
 	public static void startApp() throws IOException
 	{
 		System.out.println("==================Welcome to Automation ===================");		
@@ -28,7 +30,7 @@ public class TestCases {
 	    }		
 	}
 	
-	@AfterClass
+	@AfterAll
 	public static void closeAll()
 	{
 		if(testQA!=null)
