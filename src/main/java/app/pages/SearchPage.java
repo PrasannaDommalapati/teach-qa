@@ -2,6 +2,7 @@ package app.pages;
 
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 
 import app.helper.BasePage;
@@ -18,14 +19,12 @@ public class SearchPage extends BasePage{
 	}
 	
 	//============================ List of locators=====================
-	private By search = By.id("lst-ib");
-	private By searchBtn = By.name("btnK");
-	
+	private By search = By.id("lst-ib");	
 	//=========================== End of locators list =================
 	
 	public void searchFunctionality() {
 		
 		enterTextTo(search, getData(0, row, 1));
-		clickOn(searchBtn);
+		enterKeys(search, Keys.ENTER);
 	}
 }

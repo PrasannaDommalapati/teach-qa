@@ -14,8 +14,9 @@ public class AutomationUtils
 	
 	public static WebDriver getWebDriver() throws IOException
 	{
-		System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir")+"\\assets\\windows\\chromedriver.exe");
-		
+		//System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir")+"\\assets\\windows\\chromedriver.exe");
+		System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir")+"/assets/mac/chromedriver");
+
 		//System.setProperty("webdriver.gecko.driver", System.getProperty("user.dir")+"\\assets\\windows\\geckodriver.exe");
 		
 		WebDriver driver = new ChromeDriver();

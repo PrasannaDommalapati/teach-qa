@@ -20,6 +20,7 @@ import java.util.concurrent.TimeUnit;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -31,8 +32,9 @@ public class BasePage {
 	WebDriver testQA;
 	public static XSSFWorkbook workBook;
 	public static XSSFSheet mySheet;
-	public static final String projStructure = System.getProperty("user.dir")+"\\assets\\data\\InputDataVersionPositive1.0.xlsx";
-	
+//	public static final String projStructure = System.getProperty("user.dir")+"\\assets\\data\\InputDataVersionPositive1.0.xlsx";
+	public static final String projStructure = System.getProperty("user.dir")+"/assets/data/InputDataVersionPositive1.0.xlsx";
+
 	public BasePage(WebDriver driv)
 	{
 		this.testQA = driv;
@@ -113,6 +115,17 @@ public class BasePage {
 		}catch(Exception e)
 		{
 			System.out.println("Element is:::"+identifier);
+			System.out.println("Exception is:::"+e);
+		}
+	}
+	
+	public void enterKeys(By locator, Keys keys) {
+		try
+		{
+			testQA.findElement(locator).sendKeys(keys);
+		}catch(Exception e)
+		{
+			System.out.println("Element is:::"+locator);
 			System.out.println("Exception is:::"+e);
 		}
 	}
