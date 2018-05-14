@@ -27,13 +27,13 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import app.utils.AutomationUtils;
+
 public class BasePage {
 	
 	WebDriver testQA;
 	public static XSSFWorkbook workBook;
-	public static XSSFSheet mySheet;
-//	public static final String projStructure = System.getProperty("user.dir")+"\\assets\\data\\InputDataVersionPositive1.0.xlsx";
-	public static final String projStructure = System.getProperty("user.dir")+"/assets/data/InputDataVersionPositive1.0.xlsx";
+	public static XSSFSheet mySheet;	
 
 	public BasePage(WebDriver driv)
 	{
@@ -44,7 +44,7 @@ public class BasePage {
 	public void readExcel()
 	{
 		try {
-			File ff = new File(projStructure);
+			File ff = new File(AutomationUtils.getDataLocation());
 			FileInputStream fis = new FileInputStream(ff);
 			workBook = new XSSFWorkbook(fis);
 			 
