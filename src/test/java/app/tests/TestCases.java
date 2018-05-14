@@ -54,6 +54,6 @@ public class TestCases {
 		
 		searchPage.searchFunctionality();
 		
-	assertEquals("Selenium - Google Search",basePage.pageTitle());		
+	assertAll("test title",()->assertEquals("Selenium - Google Search",basePage.pageTitle()));		
 	}
 }
