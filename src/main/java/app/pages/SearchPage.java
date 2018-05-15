@@ -23,7 +23,7 @@ public class SearchPage extends BasePage{
 	//=========================== End of locators list =================
 	
 	public void searchFunctionality() {
-		
+			
 		enterTextTo(search, getData(0, row, 1));
 		enterKeys(search, Keys.ENTER);
 	}

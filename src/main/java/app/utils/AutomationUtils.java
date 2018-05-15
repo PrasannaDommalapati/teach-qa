@@ -1,6 +1,9 @@
 package app.utils;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
 
@@ -16,44 +19,67 @@ public class AutomationUtils
 {
 	private static String baseUrl = "https://www.google.co.uk";//keep ur own base URL
 	public static final String BROWSER = "chrome";
+	private static String OS = null;
 	public static WebDriver driver = null;
+	
+    // properties
+    public static Properties CONFIG;
+    public static Properties OR;
+    
+	public void config() throws Exception {
+		
+        FileInputStream fs;
+		try {
+			fs = new FileInputStream("src/test/java/com/totsy/config/config.properties");
+			CONFIG= new Properties();
+	        CONFIG.load(fs);
+
+	        fs = new FileInputStream("src/test/java/com/totsy/config/or.properties");
+	        OR= new Properties();
+	        OR.load(fs);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        
+	}
 	
 	public static WebDriver getWebDriver() throws IOException
 	{
 				
 		switch (BROWSER) {
 		case "chrome":
-			if(getOS().equals("Mac OS X")) 
+			if(isMac()) 
 				System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir")+"/assets/mac/chromedriver");
-			 else
+			 else if(isWindows()) 
 				 System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir")+"\\assets\\windows\\chromedriver.exe");
 			driver = new ChromeDriver();
 			break;
 		case "firefox":
-			if(getOS().equals("Mac OS X")) 
+			if(isMac()) 
 				System.setProperty("webdriver.gecko.driver", System.getProperty("user.dir")+"/assets/mac/geckodriver");
-			 else
+			 else if(isWindows()) 
 				 System.setProperty("webdriver.gecko.driver", System.getProperty("user.dir")+"\\assets\\windows\\geckodriver.exe");
 			driver = new FirefoxDriver();
 			break;
 		case "ie":
-			if(getOS().equals("Mac OS X")) 
+			if(isMac()) 
 				System.setProperty("webdriver.ie.driver", System.getProperty("user.dir")+"/assets/mac/iedriver");
-			 else
+			 else if(isWindows()) 
 				 System.setProperty("webdriver.ie.driver", System.getProperty("user.dir")+"\\assets\\windows\\iedriver.exe");
 			driver = new InternetExplorerDriver();
 			break;
 		case "edge":
-			if(getOS().equals("Mac OS X")) 
+			if(isMac()) 
 				System.setProperty("webdriver.edge.driver", System.getProperty("user.dir")+"/assets/mac/edgedriver");
-			 else
+			 else if(isWindows()) 
 				 System.setProperty("webdriver.edge.driver", System.getProperty("user.dir")+"\\assets\\windows\\edgedriver.exe");
 			driver = new EdgeDriver();
 			break;
 		case "safari":
-			if(getOS().equals("Mac OS X")) 
+			if(isMac()) 
 				System.setProperty("webdriver.safari.driver", System.getProperty("user.dir")+"/assets/mac/safaridriver");
-			 else
+			 else if(isWindows()) 
 				 System.setProperty("webdriver.safari.driver", System.getProperty("user.dir")+"\\assets\\windows\\safaridriver.exe");
 			driver = new SafariDriver();
 			break;
@@ -69,19 +95,28 @@ public class AutomationUtils
 		return driver;
 	}
 	
-	public static String getOS() {
-		
-		return System.getProperty("os.name");
-	}
+
+     public static String getOS(){
+         if(OS == null) { OS = System.getProperty("os.name"); }
+         return OS;
+     }
+     public static boolean isWindows(){
+         return getOS().startsWith("Windows");
+     }
+
+     public static boolean isMac(){
+         return getOS().startsWith("Mac");
+     }
 	
 	public static String getDataLocation() {
-		if(getOS() == null) {
-			return "You are running Tests in invalid Operating System! Please try in valid operating System";
-		}
-		else if(getOS().equals("Mac OS X")) {
+		
+		if(isMac()) {
 			return System.getProperty("user.dir")+"/assets/data/InputDataVersionPositive1.0.xlsx";
-		}else {
+		}else if(isWindows()) {
 			return  System.getProperty("user.dir")+"\\assets\\data\\InputDataVersionPositive1.0.xlsx";
+		}else 
+		{
+			return "You are running Tests in invalid Operating System";
 		}
 	}
 
